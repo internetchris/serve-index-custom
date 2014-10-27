@@ -1,4 +1,4 @@
-# serve-index
+# serve-index-custom (forked from version 1.5.0)
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]

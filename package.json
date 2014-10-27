@@ -1,7 +1,7 @@
 {
   "name": "serve-index-custom",
   "description": "Serve directory listings",
-  "version": "1.5.1",
+  "version": "1.0.0",
   "author": "Douglas Christopher Wilson <doug@somethingdoug.com> / modified by Chris Sund <chris@ookla.com>",
   "license": "MIT",
   "repository": "internetchris/serve-index-custom",
