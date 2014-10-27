@@ -1,17 +1,11 @@
 # serve-index-custom (forked from version 1.5.0)
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Build Status][travis-image]][travis-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
-[![Gratipay][gratipay-image]][gratipay-url]
-
   Serves pages that contain directory listings for a given path.
 
 ## Install
 
 ```sh
-$ npm install serve-index
+$ npm install git@github.com:internetchris/serve-index-custom.git
 ```
 
 ## API
