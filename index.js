@@ -245,29 +245,28 @@ function iconLookup(filename) {
   if (filename.indexOf("wp") > -1) {
     return {
       className: 'fa fa-windows sticon',
-      fileName: "placeholder.png"
+      fileName: "page_white.png"
     };
   }
 
   if (filename.indexOf("android") > -1) {
-    console.log( icons.default);
     return {
       className: 'fa fa-android sticon',
-      fileName: "placeholder.png"
+      fileName: "page_white.png"
     };
   }
 
   if (filename.indexOf("iphone") > -1) {
     return {
       className: 'fa fa-apple sticon',
-      fileName: "placeholder.png"
+      fileName: "page_white.png"
     };
   }
 
   if (filename.indexOf("stnet") > -1) {
     return {
       className: 'fa fa-desktop sticon',
-      fileName: "placeholder.png"
+      fileName: "page_white.png"
     };
   }
 
@@ -327,13 +326,14 @@ function iconStyle (files, useIcons) {
  */
 
 function html(files, dir, useIcons, view) {
-  return '<table id="files" class="view-' + view + '">'
-    + (view == 'details' ? (
-      '<tr class="header">'
-      + '<th class="name">Name</th>'
-      + '<th class="size">Size</th>'
-      + '<th class="date">Modified</th>'
-      + '</tr>') : '')
+  return '<table cellspacing="0" id="files">'
+      + '<thead>'
+      + '<tr>'
+      + '<th><i class="fa fa-sort"><span>Name</span></i></th>'
+      + '<th><i class="fa fa-sort"><span>Size</span></i></th>'
+      + '<th><i class="fa fa-sort"><span>Modified</span></i></th>'
+      + '</tr>'
+      + '</thead>'
     + files.map(function(file){
     var isDir = '..' == file.name || (file.stat && file.stat.isDirectory())
       , classes = []
@@ -366,15 +366,15 @@ function html(files, dir, useIcons, view) {
       ? file.stat.size
       : '';
 
-    return '<tr><a href="'
+    return '<tr><td><a href="'
       + normalizeSlashes(normalize(path.join('/')))
       + '" class="'
       + classes.join(' ') + '"'
       + ' title="' + file.name + '">'
-      + '<td class="name">'+file.name+'</td>'
+      + file.name+'</a></td>'
       + '<td class="size">'+size+'</td>'
       + '<td class="date">'+date+'</td>'
-      + '</a></tr>';
+      + '</tr>';
 
   }).join('\n') + '</ul>';
 }
