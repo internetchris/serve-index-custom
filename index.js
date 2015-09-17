@@ -179,8 +179,6 @@ exports.html = function(req, res, files, next, dir, showUp, icons, path, view, t
           .replace(/\{linked-path\}/g, htmlPath(dir));
 
         var buf = new Buffer(str, 'utf8');
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        res.setHeader('Content-Length', buf.length);
         res.end(buf);
       });
     });
