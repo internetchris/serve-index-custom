@@ -172,10 +172,13 @@ exports.html = function(req, res, files, next, dir, showUp, icons, path, view, t
         files = files.map(function(file, i){ return { name: file, stat: stats[i] }; });
         files.sort(fileSort);
         if (showUp) files.unshift({ name: '..' });
+        
+        var user = req.user || "";
         str = str
           .replace(/\{style\}/g, style.concat(iconStyle(files, icons)))
           .replace(/\{files\}/g, html(files, dir, icons, view))
           .replace(/\{directory\}/g, dir)
+          .replace(/\{user\}/g, user)
           .replace(/\{linked-path\}/g, htmlPath(dir));
 
         var buf = new Buffer(str, 'utf8');
@@ -239,37 +242,8 @@ function htmlPath(dir) {
 function iconLookup(filename) {
   var ext = extname(filename);
 
-  // check for speedtestnet specific files
-  if (filename.indexOf("wp") > -1) {
-    return {
-      className: 'fa fa-windows sticon',
-      fileName: "page_white.png"
-    };
-  }
-
-  if (filename.indexOf("android") > -1) {
-    return {
-      className: 'fa fa-android sticon',
-      fileName: "page_white.png"
-    };
-  }
-
-  if (filename.indexOf("iphone") > -1) {
-    return {
-      className: 'fa fa-apple sticon',
-      fileName: "page_white.png"
-    };
-  }
-
-  if (filename.indexOf("stnet") > -1) {
-    return {
-      className: 'fa fa-desktop sticon',
-      fileName: "page_white.png"
-    };
-  }
-
   return {
-    className: 'fa fa-file-o',
+    className: 'icon glyphicon-cloud-download',
     fileName: icons.default
   };
 }
@@ -327,9 +301,9 @@ function html(files, dir, useIcons, view) {
   return '<table cellspacing="0" id="files">'
       + '<thead>'
       + '<tr>'
-      + '<th><i class="fa fa-sort"><span>Name</span></i></th>'
-      + '<th><i class="fa fa-sort"><span>Size</span></i></th>'
-      + '<th><i class="fa fa-sort"><span>Modified</span></i></th>'
+      + '<th><i class="icon glyphicon-sort"><span>Name</span></i></th>'
+      + '<th><i class="icon glyphicon-sort"><span>Size</span></i></th>'
+      + '<th><i class="icon glyphicon-sort"><span>Modified</span></i></th>'
       + '</tr>'
       + '</thead>'
     + files.map(function(file){
@@ -338,16 +312,12 @@ function html(files, dir, useIcons, view) {
       , path = dir.split('/').map(function (c) { return encodeURIComponent(c); });
 
     if (useIcons) {
-      classes.push('icon');
 
       if (isDir) {
-        classes.push('icon-directory fa fa-folder');
+        classes.push('icon-directory icon glyphicon-folder-close');
       } else {
         var ext = extname(file.name);
         var icon = iconLookup(file.name);
-
-        classes.push('icon');
-        classes.push('icon-' + ext.substring(1));
 
         if (classes.indexOf(icon.className) === -1) {
           classes.push(icon.className);
